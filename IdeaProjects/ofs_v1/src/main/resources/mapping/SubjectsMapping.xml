@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.SubjectsMapper">
+    <resultMap id="BaseResultMap" type="org.yzf.ofs.ofs_v1.entity.Subjects">
+        <result column="SUBJECTS_ID" jdbcType="INTEGER" property="subjectsId" />
+        <result column="SUBJECTS_NAME" jdbcType="VARCHAR" property="subjectsName" />
+        <result column="SUBJECTS_REM" jdbcType="VARCHAR" property="subjectsRem" />
+    </resultMap>
+    <select id="getAllSubjects" resultMap="BaseResultMap">
+        select * from OFS_SUBJECTS
+    </select>
+
+    <insert id="addSubject" parameterType="org.yzf.ofs.ofs_v1.entity.Subjects">
+        INSERT INTO OFS_SUBJECTS (SUBJECTS_ID, SUBJECTS_NAME,SUBJECTS_REM) value (#{subjectsId}, #{subjectsName}, #{subjectsRem})
+    </insert>
+
+
+    <insert id="addSubjects" useGeneratedKeys="true"  parameterType="org.yzf.ofs.ofs_v1.entity.Subjects">
+        insert into OFS_SUBJECTS (SUBJECTS_ID, SUBJECTS_NAME,SUBJECTS_REM)
+        values
+        <foreach collection="list" item="subjects" index="index" separator=",">
+            (#{subjects.subjectsId,jdbcType=BIGINT}, #{subjects.subjectsName,jdbcType=VARCHAR}, #{subjects.subjectsRem,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>

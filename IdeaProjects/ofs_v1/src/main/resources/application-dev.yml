@@ -1,0 +1,30 @@
+erver:
+  #对外提供服务的端口，必须保持唯一
+  port: 8080
+
+spring:
+  #数据库链接的配置，确保你的数据库已经安装完成，并成功新建了ofs数据库
+  datasource:
+    #数据库用户名
+    username: test
+    #数据库密码
+    password: test123
+    #url中database为对应的数据库名称
+    url: jdbc:mysql://localhost:3306/ofs?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  #mybatis的包配置，改成自己的名字
+  type-aliases-package: org.yzf.ofs.ofs_v1.entity
+
+  # open camel rule mapping
+  mybatis:
+    configuration:
+      map-underscore-to-camel-case=true
+      log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+
+#showSql
+logging:
+  level:
+    org.yzf.ofs.ofs_v1.mapper: debug
