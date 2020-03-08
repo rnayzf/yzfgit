@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.AccountBalanceMapper">
+    <resultMap id="AccountBalanceResultMap" type="org.yzf.ofs.ofs_v1.entity.AccountBalance">
+        <result column="ACCOUNT_NO" jdbcType="VARCHAR" property="accountNo" />
+        <result column="TRANS_DATE" jdbcType="VARCHAR" property="transDate" />
+        <result column="BALANCE" jdbcType="DECIMAL" property="balance" />
+    </resultMap>
+    <select id="getAllAccountBalance" resultType="org.yzf.ofs.ofs_v1.entity.AccountBalance" resultMap="AccountBalanceResultMap">
+        select * from ofs_account_bal
+    </select>
+
+    <select id="getAccountBalanceById" resultType="org.yzf.ofs.ofs_v1.entity.AccountBalance" resultMap="AccountBalanceResultMap">
+        select * from ofs_account_bal where account_no=#{accountNo}
+    </select>
+
+    <insert id="addAccountBalance" parameterType="org.yzf.ofs.ofs_v1.entity.AccountBalance">
+        insert into ofs_account_bal
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                ACCOUNT_NO,
+            </if>
+            <if test="transDate != null" >
+                TRANS_DATE,
+            </if>
+            <if test="balance != null" >
+                BALANCE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="transDate != null" >
+                #{transDate,jdbcType=DATE},
+            </if>
+            <if test="balance != null" >
+                #{balance,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updAccountBalanceById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountBalance" >
+        update ofs_account_bal set account_no=#{accountNo},trans_date=#{transDate},balance=#{balance}
+		where account_no=#{accountNo}
+    </update>
+
+    <delete id="delAccountBalanceById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountBalance">
+        delete from ofs_account_bal
+		where account_no=#{accountNo}
+    </delete>
+</mapper>

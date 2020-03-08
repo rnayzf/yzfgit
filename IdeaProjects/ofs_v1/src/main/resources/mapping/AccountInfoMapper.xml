@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.AccountInfoMapper">
+    <resultMap id="AccountInfoResultMap" type="org.yzf.ofs.ofs_v1.entity.AccountInfo">
+        <result column="ACCOUNT_NO" jdbcType="VARCHAR" property="accountNo" />
+        <result column="ACCOUNT_NAME" jdbcType="VARCHAR" property="accountName" />
+        <result column="MARK" jdbcType="VARCHAR" property="mark" />
+        <result column="BALANCE" jdbcType="DECIMAL" property="balance" />
+    </resultMap>
+    <select id="getAllAccountInfo" resultType="org.yzf.ofs.ofs_v1.entity.AccountInfo" resultMap="AccountInfoResultMap">
+        select * from ofs_account_info
+    </select>
+
+    <select id="getAccountInfoById" resultType="org.yzf.ofs.ofs_v1.entity.AccountInfo" resultMap="AccountInfoResultMap">
+        select * from ofs_account_info where account_no=#{accountNo}
+    </select>
+
+    <insert id="addAccountInfo" parameterType="org.yzf.ofs.ofs_v1.entity.AccountInfo" >
+        insert into ofs_account_info (ACCOUNT_NO,ACCOUNT_NAME, MARK, BALANCE)
+        values (#{accountNo},#{accountName}, #{mark}, #{balance})
+    </insert>
+
+    <insert id="addAccountInfoSelective" parameterType="org.yzf.ofs.ofs_v1.entity.AccountInfo">
+        insert into ofs_account_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                ACCOUNT_NO,
+            </if>
+            <if test="accountName != null" >
+                ACCOUNT_NAME,
+            </if>
+            <if test="mark != null" >
+                MARK,
+            </if>
+            <if test="balance != null" >
+                BALANCE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="accountName != null" >
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null" >
+                #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null" >
+                #{balance,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updAccountInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountInfo">
+        update ofs_account_info set account_no=#{accountNo},account_name=#{accountName},mark=#{mark},balance=#{balance}
+		where account_no=#{accountNo}
+    </update>
+
+    <delete id="delAccountInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountInfo">
+        delete from ofs_account_info
+		where account_no=#{accountNo}
+    </delete>
+</mapper>

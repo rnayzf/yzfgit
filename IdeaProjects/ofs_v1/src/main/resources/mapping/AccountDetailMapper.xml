@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.AccountDetailMapper">
+    <resultMap id="AccountDetailResultMap" type="org.yzf.ofs.ofs_v1.entity.AccountDetail">
+        <result column="ACCOUNT_NO" jdbcType="VARCHAR" property="accountNo" />
+        <result column="STUDENT_ID" jdbcType="VARCHAR" property="studentId" />
+        <result column="DRANDCR" jdbcType="VARCHAR" property="drandcr" />
+        <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+        <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+        <result column="TRANS_DATE" jdbcType="DATE" property="transDate" />
+        <result column="TRANS_TIME" jdbcType="TIME" property="transTime" />
+        <result column="SUMMARY" jdbcType="VARCHAR" property="summary" />
+        <result column="BALANCE" jdbcType="DECIMAL" property="balance" />
+    </resultMap>
+    <select id="getAllAccountDetail" resultType="org.yzf.ofs.ofs_v1.entity.AccountDetail" resultMap="AccountDetailResultMap">
+        select * from ofs_account_dtl
+    </select>
+
+    <select id="getAccountDetailById" resultType="org.yzf.ofs.ofs_v1.entity.AccountDetail" resultMap="AccountDetailResultMap">
+        select * from ofs_account_dtl where account_no=#{accountNo}
+    </select>
+
+    <insert id="addAccountDetail" parameterType="org.yzf.ofs.ofs_v1.entity.AccountDetail" >
+        insert into ofs_account_dtl (ACCOUNT_NO,STUDENT_ID, DRANDCR, AMOUNT, SEQ_NO, TRANS_DATE, TRANS_TIME,SUMMARY,BALANCE)
+        value (#{accountNo,jdbcType=VARCHAR},#{studentId,jdbcType=VARCHAR}, #{drandcr,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{seqNo,jdbcType=VARCHAR}, #{transDate,jdbcType=DATE}, #{transTime,jdbcType=TIME}, #{summary,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL})
+    </insert>
+
+    <insert id="addAccountDetailSelective" parameterType="org.yzf.ofs.ofs_v1.entity.AccountDetail">
+        insert into ofs_account_dtl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountNo != null">
+                ACCOUNT_NO,
+            </if>
+            <if test="studentId != null">
+                STUDENT_ID,
+            </if>
+            <if test="drandcr != null">
+                DRANDCR,
+            </if>
+            <if test="amount != null">
+                AMOUNT,
+            </if>
+            <if test="seqNo != null">
+                SEQ_NO,
+            </if>
+            <if test="transDate != null">
+                TRANS_DATE,
+            </if>
+            <if test="transTime != null">
+                TRANS_TIME,
+            </if>
+            <if test="summary != null">
+                SUMMARY,
+            </if>
+            <if test="balance != null">
+                BALANCE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="studentId != null" >
+                #{studentId,jdbcType=VARCHAR},
+            </if>
+            <if test="drandcr != null" >
+                #{drandcr,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="seqNo != null" >
+                #{seqNo,jdbcType=VARCHAR},
+            </if>
+            <if test="transDate != null" >
+                #{transDate,jdbcType=VARCHAR},
+            </if>
+            <if test="transDate != null" >
+                #{transDate,jdbcType=DATE},
+            </if>
+            <if test="transTime != null" >
+                #{transTime,jdbcType=TIME},
+            </if>
+            <if test="summary != null" >
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null" >
+                #{balance,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updAccountDetailById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountDetail">
+        update ofs_account_dtl set account_no=#{accountNo},student_id=#{studentId},drandcr=#{drandcr},amount=#{amount},seq_no=#{seqNo},trans_date=#{transDate},trans_time=#{transTime},summary=#{summary},balance=#{balance}
+		where account_no=#{accountNo}
+    </update>
+
+    <delete id="delAccountDetailById" parameterType="org.yzf.ofs.ofs_v1.entity.AccountDetail">
+        delete from ofs_account_dtl
+		where account_no=#{accountNo}
+    </delete>
+</mapper>

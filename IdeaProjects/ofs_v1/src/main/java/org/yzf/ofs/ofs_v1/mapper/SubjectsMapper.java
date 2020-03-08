@@ -16,6 +16,10 @@ public interface SubjectsMapper {
 
     int addSubjects(List<Subjects> subjects);
 
+    int addSubjectsOne(Subjects subjects);
+
+    int addSubjectsSelective(Subjects subjects);
+
     @Select({ "select * from  ofs_subjects " })
     List<Map<Object,Object>> selectAll();
 

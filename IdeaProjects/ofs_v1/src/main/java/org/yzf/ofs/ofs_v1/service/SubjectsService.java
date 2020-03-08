@@ -22,6 +22,16 @@ public class SubjectsService {
         return list;
     }
 
+    public int addSubjectsOne(Subjects subjects)
+    {
+       return subjectsMapper.addSubjectsOne(subjects);
+    }
+
+    public int addSubjectsSelective(Subjects subjects)
+    {
+        return subjectsMapper.addSubjectsSelective(subjects);
+    }
+
     public void addSubject(Subjects subject)
     {
         subjectsMapper.addSubject(subject);

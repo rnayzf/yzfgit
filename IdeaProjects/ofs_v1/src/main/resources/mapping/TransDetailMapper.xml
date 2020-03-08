@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.TransDetailMapper">
+    <resultMap id="TransDetailResultMap" type="org.yzf.ofs.ofs_v1.entity.TransDetail">
+        <result column="ACCOUNT_NO" jdbcType="VARCHAR" property="accountNo" />
+        <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+        <result column="VOUCHER_FILE_PATH" jdbcType="VARCHAR" property="voucherFilePath" />
+        <result column="ENT_DATE" jdbcType="DATE" property="entDate" />
+        <result column="OPER_ID" jdbcType="VARCHAR" property="operId" />
+    </resultMap>
+    <select id="getAllTransDetail" resultType="org.yzf.ofs.ofs_v1.entity.TransDetail" resultMap="TransDetailResultMap">
+        select * from ofs_trans_dtl
+    </select>
+
+    <select id="getTransDetailById" resultType="org.yzf.ofs.ofs_v1.entity.TransDetail" resultMap="TransDetailResultMap">
+        select * from ofs_trans_dtl where account_no=#{accountNo}
+    </select>
+
+    <insert id="addTransDetail" parameterType="org.yzf.ofs.ofs_v1.entity.TransDetail">
+        insert into ofs_trans_dtl
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                ACCOUNT_NO,
+            </if>
+            <if test="seqNo != null" >
+                SEQ_NO,
+            </if>
+            <if test="voucherFilePath != null" >
+                VOUCHER_FILE_PATH,
+            </if>
+            <if test="entDate != null" >
+                ENT_DATE,
+            </if>
+            <if test="operId != null" >
+                OPER_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="accountNo != null" >
+                #{accountNo,jdbcType=VARCHAR},
+            </if>
+            <if test="seqNo != null" >
+                #{seqNo,jdbcType=VARCHAR},
+            </if>
+            <if test="voucherFilePath != null" >
+                #{voucherFilePath,jdbcType=VARCHAR},
+            </if>
+            <if test="entDate != null" >
+                #{entDate,jdbcType=DATE},
+            </if>
+            <if test="operId != null" >
+                #{operId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updTransDetailById" parameterType="org.yzf.ofs.ofs_v1.entity.TransDetail">
+        update ofs_trans_dtl set account_no=#{accountNo},seq_no=#{seqNo},voucher_file_path=#{voucherFilePath},ent_date=#{entDate},operId=#{operId}
+		where account_no=#{accountNo}
+    </update>
+
+    <delete id="delTransDetailById" parameterType="org.yzf.ofs.ofs_v1.entity.TransDetail">
+        delete from ofs_trans_dtl
+		where account_no=#{accountNo}
+    </delete>
+</mapper>

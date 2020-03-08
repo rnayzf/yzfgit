@@ -10,9 +10,8 @@ import org.yzf.ofs.ofs_v1.resultUtil.Result;
 import org.yzf.ofs.ofs_v1.resultUtil.ResultEnum;
 import org.yzf.ofs.ofs_v1.resultUtil.ResultUtil;
 import org.yzf.ofs.ofs_v1.service.SubjectsService;
+import org.yzf.ofs.ofs_v1.test.SpringBootLong4jApplicationTests;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +29,16 @@ public class SubjectsController {
     public List<Subjects> getAllSubjects() {
         List<Subjects> retList = subjectsService.getAllSubjects();
         return retList;
+    }
+
+    @RequestMapping(value = "/addSubjectsOne" , method = RequestMethod.POST)
+    public int addSubjectsOne(@RequestBody Subjects subjects) {
+        return subjectsService.addSubjectsOne(subjects);
+    }
+
+    @RequestMapping(value = "/addSubjectsSelective" , method = RequestMethod.POST)
+    public int addSubjectsSelective(@RequestBody Subjects subjects) {
+        return subjectsService.addSubjectsSelective(subjects);
     }
 
     @RequestMapping(value = "/addSubject" , method = RequestMethod.GET)
