@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.OfsClassInfoMapper">
+    <resultMap id="ClassInfoResultMap" type="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity">
+        <result column="CLASS_ID" jdbcType="VARCHAR" property="classId" />
+        <result column="CLASS_NAME" jdbcType="VARCHAR" property="className" />
+        <result column="CLASS_MONITOR_ID" jdbcType="VARCHAR" property="classMonitorId" />
+        <result column="CRE_DATE" jdbcType="DATE" property="creDate" />
+        <result column="FIN_DATE" jdbcType="DATE" property="finDate" />
+        <result column="MARK" jdbcType="VARCHAR" property="mark" />
+    </resultMap>
+
+    <select id="getAllOfsClassInfo" resultType="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity" resultMap="ClassInfoResultMap">
+        select * from ofs_class_info
+    </select>
+
+    <select id="getOfsClassInfoById" resultType="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity" resultMap="ClassInfoResultMap">
+        select * from ofs_class_info where CLASS_ID=#{classId}
+    </select>
+
+    <insert id="addOfsClassInfo" parameterType="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity" >
+        insert into ofs_class_info (CLASS_ID,CLASS_NAME, CLASS_MONITOR_ID, CRE_DATE, FIN_DATE, MARK)
+        values (#{classId},#{className}, #{classMonitorId}, #{creDate}, #{finDate}, #{mark})
+    </insert>
+
+    <update id="updOfsClassInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity">
+        update ofs_class_info set CLASS_ID=#{classId},CLASS_NAME=#{className},CLASS_MONITOR_ID=#{classMonitorId},CRE_DATE=#{creDate},FIN_DATE=#{finDate},MARK=#{mark}
+		where CLASS_ID=#{classId}
+    </update>
+
+    <delete id="delOfsClassInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsClassInfoEntity">
+        delete from ofs_class_info
+		where CLASS_ID=#{classId}
+    </delete>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.OfsStudentInfoMapper">
+    <resultMap id="StudentInfoResultMap" type="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity">
+        <result column="STUDENT_ID" jdbcType="VARCHAR" property="studentId" />
+        <result column="STUDENT_NAME" jdbcType="VARCHAR" property="studentName" />
+        <result column="IDENTITY_CARD_ID" jdbcType="VARCHAR" property="identityCardId" />
+        <result column="START_DATE" jdbcType="DATE" property="startDate" />
+        <result column="FINISH_DATE" jdbcType="DATE" property="finishDate" />
+    </resultMap>
+
+    <select id="getAllOfsStudentInfo" resultType="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity" resultMap="StudentInfoResultMap">
+        select * from ofs_student_info
+    </select>
+
+    <select id="getOfsStudentInfoById" resultType="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity" resultMap="StudentInfoResultMap">
+        select * from ofs_student_info where STUDENT_ID=#{studentId}
+    </select>
+
+    <insert id="addOfsStudentInfo" parameterType="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity" >
+        insert into ofs_student_info (STUDENT_ID,STUDENT_NAME, IDENTITY_CARD_ID, START_DATE, FINISH_DATE)
+        values (#{studentId},#{studentName}, #{identityCardId}, #{startDate}, #{finishDate})
+    </insert>
+
+    <update id="updOfsStudentInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity">
+        update ofs_student_info set STUDENT_ID=#{studentId},STUDENT_NAME=#{studentName},IDENTITY_CARD_ID=#{identityCardId},START_DATE=#{startDate},FINISH_DATE=#{finishDate}
+		where STUDENT_ID=#{studentId}
+    </update>
+
+    <delete id="delOfsStudentInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsStudentInfoEntity">
+        delete from ofs_student_info
+		where STUDENT_ID=#{studentId}
+    </delete>
+</mapper>

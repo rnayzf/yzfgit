@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.OfsExamInfoMapper">
+    <resultMap id="ExamInfoResultMap" type="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity">
+        <result column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+        <result column="CORRELATE_ID" jdbcType="VARCHAR" property="correlateId" />
+        <result column="MARK" jdbcType="VARCHAR" property="mark" />
+        <result column="EXAM_DATE" jdbcType="DATE" property="examDate" />
+    </resultMap>
+
+    <select id="getAllOfsExamInfo" resultType="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity" resultMap="ExamInfoResultMap">
+        select * from ofs_exam_info
+    </select>
+
+    <select id="getOfsExamInfoById" resultType="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity" resultMap="ExamInfoResultMap">
+        select * from ofs_exam_info where EXAM_ID=#{examId}
+    </select>
+
+    <insert id="addOfsExamInfo" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity" >
+        insert into ofs_exam_info (EXAM_ID,CORRELATE_ID, MARK, EXAM_DATE)
+        values (#{examId},#{correlateId}, #{mark}, #{examDate})
+    </insert>
+
+    <update id="updOfsExamInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity">
+        update ofs_exam_info set EXAM_ID=#{classId},CORRELATE_ID=#{correlateId},MARK=#{mark},EXAM_DATE=#{examDate}
+		where EXAM_ID=#{examId}
+    </update>
+
+    <delete id="delOfsExamInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamInfoEntity">
+        delete from ofs_exam_info
+		where EXAM_ID=#{examId}
+    </delete>
+</mapper>

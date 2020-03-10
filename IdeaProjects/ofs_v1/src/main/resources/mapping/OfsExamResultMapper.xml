@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.OfsExamResultMapper">
+    <resultMap id="ExamResultResultMap" type="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity">
+        <result column="EXAM_ID" jdbcType="VARCHAR" property="examId" />
+        <result column="STUDENT_ID" jdbcType="VARCHAR" property="studentId" />
+        <result column="EXAM_DATE" jdbcType="DATE" property="examDate" />
+        <result column="EXAM_RESULT" jdbcType="VARCHAR" property="examResult" />
+    </resultMap>
+
+    <select id="getAllOfsExamResult" resultType="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity" resultMap="ExamResultResultMap">
+        select * from ofs_exam_result
+    </select>
+
+    <select id="getOfsExamResultById" resultType="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity" resultMap="ExamResultResultMap">
+        select * from ofs_exam_result where EXAM_ID=#{examId} and STUDENT_ID=#{studentId}
+    </select>
+
+    <insert id="addOfsExamResult" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity" >
+        insert into ofs_exam_result (EXAM_ID,STUDENT_ID, EXAM_DATE, EXAM_RESULT)
+        values (#{examId},#{studentId}, #{examDate}, #{examResult})
+    </insert>
+
+    <update id="updOfsExamResultById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity">
+        update ofs_exam_result set EXAM_ID=#{examId},STUDENT_ID=#{studentId},EXAM_DATE=#{examDate},EXAM_RESULT=#{examResult}
+		where EXAM_ID=#{examId} and STUDENT_ID=#{studentId}
+    </update>
+
+    <delete id="delOfsExamResultById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsExamResultEntity">
+        delete from ofs_exam_result
+		where EXAM_ID=#{examId} and STUDENT_ID=#{studentId}
+    </delete>
+</mapper>

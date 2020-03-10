@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.OfsTeamInfoMapper">
+    <resultMap id="TeamInfoResultMap" type="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity">
+        <result column="TEAM_ID" jdbcType="VARCHAR" property="teamId" />
+        <result column="CLASS_ID" jdbcType="VARCHAR" property="classId" />
+        <result column="TEAM_MONITOR_ID" jdbcType="VARCHAR" property="teamMonitorId" />
+        <result column="CRE_DATE" jdbcType="DATE" property="creDate" />
+        <result column="MARK" jdbcType="VARCHAR" property="mark" />
+    </resultMap>
+
+    <select id="getAllTeamInfo" resultType="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity" resultMap="TeamInfoResultMap">
+        select * from ofs_team_info
+    </select>
+
+    <select id="getTeamInfoById" resultType="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity" resultMap="TeamInfoResultMap">
+        select * from ofs_team_info where TEAM_ID=#{teamId}
+    </select>
+
+    <insert id="addTeamInfo" parameterType="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity" >
+        insert into ofs_team_info (TEAM_ID,CLASS_ID, TEAM_MONITOR_ID, CRE_DATE, MARK)
+        values (#{teamId},#{classId}, #{teamMonitorId}, #{creDate}, #{mark})
+    </insert>
+
+    <update id="updTeamInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity">
+        update ofs_team_info set TEAM_ID=#{studentId},CLASS_ID=#{studentName},TEAM_MONITOR_ID=#{identityCardId},CRE_DATE=#{startDate},MARK=#{finishDate}
+		where TEAM_ID=#{teamId}
+    </update>
+
+    <delete id="delTeamInfoById" parameterType="org.yzf.ofs.ofs_v1.entity.OfsTeamInfoEntity">
+        delete from ofs_team_info
+		where TEAM_ID=#{teamId}
+    </delete>
+</mapper>
