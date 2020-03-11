@@ -10,7 +10,6 @@ import org.yzf.ofs.ofs_v1.resultUtil.Result;
 import org.yzf.ofs.ofs_v1.resultUtil.ResultEnum;
 import org.yzf.ofs.ofs_v1.resultUtil.ResultUtil;
 import org.yzf.ofs.ofs_v1.service.SubjectsService;
-import org.yzf.ofs.ofs_v1.test.SpringBootLong4jApplicationTests;
 
 import java.util.List;
 import java.util.Map;
@@ -18,8 +17,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/subjects")
 public class SubjectsController {
-
-    private Logger logger = LoggerFactory.getLogger(SpringBootLong4jApplicationTests.class);
 
     @Autowired
     private SubjectsService subjectsService;

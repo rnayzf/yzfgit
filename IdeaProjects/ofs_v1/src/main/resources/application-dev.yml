@@ -3,6 +3,11 @@ erver:
   port: 8080
 
 spring:
+  #设置页面跳转
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   #数据库链接的配置，确保你的数据库已经安装完成，并成功新建了ofs数据库
   datasource:
     #数据库用户名
@@ -28,3 +33,5 @@ mybatis:
 logging:
   level:
     org.yzf.ofs.ofs_v1.mapper: debug
+
+

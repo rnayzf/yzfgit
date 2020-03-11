@@ -1,11 +1,15 @@
 package org.yzf.ofs.ofs_v1.entity;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ofs_class_info", schema = "ofs", catalog = "")
+@Table(name = "ofs_class_info", schema = "ofs")
 public class OfsClassInfoEntity {
     private String classId;
     private String className;
