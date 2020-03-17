@@ -57,22 +57,37 @@ public class SubjectsService {
         return subjectsMapper.delSubjects(subjects);
     }
 
-    public List<Map<Object,Object>>  selectAll()
+    public List<Subjects>  selectAll()
     {
-        List<Map<Object,Object>>  retlist = subjectsMapper.selectAll();
+        List<Subjects>  retlist = subjectsMapper.selectAll();
         return retlist;
     }
 
-    public Map<Object,Object> selectOne(Subjects subjects)
-    {
-        return subjectsMapper.selectOne(subjects);
+    public Subjects selectByID(Integer subjectsId) {
+
+        Subjects ret=subjectsMapper.selectById(subjectsId);
+
+        return ret;
     }
 
-    public List<Map<Object,Object>>  selectOne1(Subjects subjects)
+    public List<Subjects> selectByName(String subjectsName)
     {
-        List<Map<Object,Object>>  retlist = subjectsMapper.selectOne1(subjects);
+        return subjectsMapper.selectByName(subjectsName);
+    }
+
+    public List<Subjects>  selectSub(Subjects subjects)
+    {
+        List<Subjects>  retlist = subjectsMapper.selectSub(subjects);
         return retlist;
     }
 
+    public int deleteById(Integer subjectsId)
+    {
+        return subjectsMapper.deleteById(subjectsId);
+    }
+    public int updateById(Subjects subjects)
+    {
+        return subjectsMapper.updateById(subjects);
+    }
 
 }
