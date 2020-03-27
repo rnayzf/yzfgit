@@ -64,6 +64,14 @@
         </dependency>
         <!-- 增加jsp支持  end-->
 
+        <!--分页插件 pagehelper 20200327-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <!-- 特别注意版本问题 -->
+            <version>1.2.3</version>
+        </dependency>
+
         <!-- idea访问数据库生成实体类支持-->
         <dependency>
             <groupId>javax.persistence</groupId>

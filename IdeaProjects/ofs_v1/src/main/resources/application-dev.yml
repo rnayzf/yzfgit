@@ -18,6 +18,8 @@ spring:
     url: jdbc:mysql://localhost:3306/ofs?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+uploadPath: C:/UploadPath/
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   #mybatis的包配置，改成自己的名字
@@ -34,4 +36,9 @@ logging:
   level:
     org.yzf.ofs.ofs_v1.mapper: debug
 
+#分页pageHelper
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
 

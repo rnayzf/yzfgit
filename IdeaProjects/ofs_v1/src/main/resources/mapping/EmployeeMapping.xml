@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yzf.ofs.ofs_v1.mapper.EmployeeMapper">
+
+    <resultMap id="BaseResultMap" type="org.yzf.ofs.ofs_v1.entity.Employee">
+        <result column="e_id" jdbcType="INTEGER" property="id" />
+        <result column="e_name" jdbcType="VARCHAR" property="name" />
+        <result column="e_age" jdbcType="INTEGER" property="age" />
+    </resultMap>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into ofs_employee (e_id,e_name,e_age)
+        values
+        <foreach collection="list" item="item" index="index"  separator=",">
+            (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.age,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <select id="getEmployeesInfo" resultMap="BaseResultMap">
+        select e_id,e_name,e_age from ofs_employee
+    </select>
+</mapper>
